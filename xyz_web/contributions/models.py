@@ -52,6 +52,7 @@ players = {
 
 class Contribution(models.Model):
     name = models.CharField(max_length=50)
+    contact_email = models.EmailField()
     video_link = models.URLField(help_text="Lenke til Vimeo eller YouTube video.")
     description = models.TextField()
 
