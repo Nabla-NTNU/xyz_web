@@ -1,3 +1,12 @@
 from django.shortcuts import render
+from django.views.generic.list import ListView
+from .models import Contribution
 
-# Create your views here.
+
+def confirm(request, token):
+    return "ff"
+
+
+class MainView(ListView):
+    model = Contribution
+    

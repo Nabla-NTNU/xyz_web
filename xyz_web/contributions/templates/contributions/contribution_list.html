@@ -1,0 +1,5 @@
+{% for contribution in contribution_list %}
+    {{ contribution }}
+    {{ contribution.video_player|safe }}
+    <br />
+{% endfor %}
