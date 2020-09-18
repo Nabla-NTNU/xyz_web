@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 
 from urllib.parse import urlparse
 
