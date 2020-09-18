@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import ModelForm
+from django.core.mail import send_mail
 
 from urllib.parse import urlparse
 
@@ -93,10 +94,40 @@ class Vote(models.Model):
     def __str__(self):
         return f"Vote by {self.username} for {self.contribution.name}"
 
+    def confirm(self):
+        if self.confirmed:
+            pass # TODO: throw AlreadyConfirmedException
+        self.confirmed = True
+        self.save()
+
+    def save(self, *args, **kwargs):
+        # If no pk, we are creating (not updating) the Vote, so send email.
+        if not self.pk:
+            self.send_confirm_challenge_mail()
+        return super().save(*args, **kwargs)
+
     def send_confirm_challenge_mail(self):
         """Sends a confirmation mail to the user, with a link the user has
         to click in order to confirm the vote."""
-        return
+
+        # TODO: better solution here. Maybe use sites framework?
+        #domain = self.request.META['HTTP_HOST']
+        domain = "localhost:8000"
+        link = "https://" + domain + "/confirm/" + self.confirmation_token
+        msg = f"Hei, \n\
+\n\
+        Vi trenger at du bekrefer din stemme på {self.contribution}.\n\
+        Trykk på denne lenken: <a href=\"{link}\">trykk meg</a>.\n\
+\n\
+        Mvh. WebKom Nabla"
+
+        send_mail(
+            'Bekreft XYZ stemme',
+            msg,
+            'webkom@nabla.ntnu.no',
+            [self.username + "@stud.ntnu.no"],
+            fail_silently=False,
+        )
 
     def send_confirmed_mail(self):
         """Sends a mail to the user confirming their vote."""

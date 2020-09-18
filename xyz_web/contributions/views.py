@@ -4,10 +4,13 @@ from django.views.generic.edit import CreateView
 from .models import Contribution, Vote
 from django.utils.html import mark_safe
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 
 
 def confirm(request, token):
-    return "ff"
+    # TODO: handle object not found
+    Vote.objects.get(confirmation_token=token).confirm()
+    return redirect('vote')
 
 
 class MainView(ListView):
