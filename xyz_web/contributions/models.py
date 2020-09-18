@@ -78,7 +78,7 @@ class Contribution(models.Model):
 
 
 class Vote(models.Model):
-    username = models.CharField(max_length=20)
+    username = models.CharField(max_length=20, unique=True)
     contribution = models.ForeignKey(
         'Contribution',
         on_delete=models.CASCADE,
