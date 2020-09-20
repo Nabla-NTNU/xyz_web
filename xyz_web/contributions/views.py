@@ -18,7 +18,7 @@ class MainView(ListView):
 
 class VoteChoiceField(ModelChoiceField):
     def label_from_instance(self, obj):
-        return mark_safe(obj.video_player)
+        return mark_safe(obj.video_player() + str(obj.number_of_votes()))
 
 class VoteForm(ModelForm):
     class Meta:

@@ -1,5 +1,6 @@
 {% for contribution in contribution_list %}
     {{ contribution }}
     {{ contribution.video_player|safe }}
+    {{ contribution.number_of_votes }}
     <br />
 {% endfor %}

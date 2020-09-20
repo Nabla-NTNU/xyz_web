@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from django.core.mail import send_mail
 
 from urllib.parse import urlparse
+from simple_history.models import HistoricalRecords
 
 import secrets
 import html
@@ -57,9 +58,13 @@ class Contribution(models.Model):
     contact_email = models.EmailField()
     video_link = models.URLField(help_text="Lenke til Vimeo eller YouTube video.")
     description = models.TextField()
+    history = HistoricalRecords()
 
     def __str__(self):
         return f"Contribution {self.name}"
+
+    def number_of_votes(self):
+        return self.vote_set.count()
 
     def get_video_service(self):
         # Assume <playername>.com. TODO: more sophisticated
@@ -90,6 +95,7 @@ class Vote(models.Model):
         default=get_random_token,
         unique=True
     )
+    history = HistoricalRecords()
 
     def __str__(self):
         return f"Vote by {self.username} for {self.contribution.name}"
