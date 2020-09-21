@@ -21,6 +21,7 @@ class Contribution(models.Model):
     contact_email = models.EmailField()
     video_link = models.URLField(help_text="Lenke til Vimeo eller YouTube video.")
     description = models.TextField()
+    approved = models.BooleanField(default=False)
     history = HistoricalRecords()
 
     def __str__(self):
@@ -41,7 +42,7 @@ class Contribution(models.Model):
 
     def video_id(self):
         return parsers[self.get_video_service()](self.video_link)
-    
+
     def video_player(self):
         return players[self.get_video_service()](self.video_link)
 

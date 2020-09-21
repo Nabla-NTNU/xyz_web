@@ -1,7 +1,7 @@
 from django.urls import path
 from django.views.generic.edit import CreateView
 
-from .views import MainView, VoteView, confirm
+from .views import MainView, VoteView, confirm, ApproveContributionView
 from .models import Contribution, Vote
 
 urlpatterns = [
@@ -12,5 +12,6 @@ urlpatterns = [
         fields='__all__',
         success_url='/'
     ), name='add'),
+    path('approve/', ApproveContributionView.as_view()),
     path('confirm/<token>/', confirm),
 ]

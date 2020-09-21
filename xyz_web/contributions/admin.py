@@ -1,11 +1,12 @@
 from django.contrib import admin
+from simple_history.admin import SimpleHistoryAdmin
 from .models import Contribution, Vote
 
 @admin.register(Contribution)
-class ContributionAdmin(admin.ModelAdmin):
+class ContributionAdmin(SimpleHistoryAdmin):
     pass
 
 
 @admin.register(Vote)
-class VoteAdmin(admin.ModelAdmin):
+class VoteAdmin(SimpleHistoryAdmin):
     pass
