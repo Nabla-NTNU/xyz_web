@@ -8,6 +8,11 @@ verify_ssl = true
 [packages]
 django = "*"
 django-simple-history = "*"
+black = ">=20"
+isort = "*"
 
 [requires]
 python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
