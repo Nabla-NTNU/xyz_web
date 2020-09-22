@@ -1,4 +1,20 @@
+<style>
+ .container {
+     display: flex;
+     flex-wrap: wrap;
+ }
+</style>
 <form method="post">{% csrf_token %}
-    {{ form }}
+    {{ form.non_field_errors }}
     <input type="submit" value="Save">
+    {{ form.username.errors }}
+    {{ form.username.label }}
+    {{ form.username }}
+
+    {{ form.contribution.errors }}
+    <div class="container">
+        {% for contribution in form.contribution %}
+        {{ contribution }}
+        {% endfor %}
+    </div>
 </form>
