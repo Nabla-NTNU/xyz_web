@@ -1,0 +1,2 @@
+{# This is almost the same as built in input_option.html, but order of label and input is reversed. #}
+{% if widget.wrap_label %}<label{% if widget.attrs.id %} for="{{ widget.attrs.id }}"{% endif %}>{{ widget.label }} {% endif %}{% include "django/forms/widgets/input.html" %}<span class="checkmark"></span> {% if widget.wrap_label %}</label>{% endif %}

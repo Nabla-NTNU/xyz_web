@@ -21,10 +21,17 @@ class MainView(ListView):
 
 class ContributionPlayerLabelMixin:
     def label_from_instance(self, obj):
-        return mark_safe(obj.video_player() + str(obj.number_of_votes()))
+        return mark_safe(obj.video_player())
+
+
+class RadioSelectCustomOption(RadioSelect):
+    """RadioSelect widget where order of label and input in template is reversed."""
+    option_template_name = 'contributions/input_option_reversed.html'
+
 
 class VoteChoiceField(ContributionPlayerLabelMixin, ModelChoiceField):
-    widget = RadioSelect
+    widget = RadioSelectCustomOption
+
     def __init__(self, *args, **kwargs):
         # TODO: There has to be a more elegant way to to this.
         # This is a hack.

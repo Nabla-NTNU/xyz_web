@@ -1,20 +1,83 @@
-<style>
- .container {
-     display: flex;
-     flex-wrap: wrap;
- }
-</style>
-<form method="post">{% csrf_token %}
-    {{ form.non_field_errors }}
-    <input type="submit" value="Save">
-    {{ form.username.errors }}
-    {{ form.username.label }}
-    {{ form.username }}
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+         .container {
+             display: flex;
+             flex-wrap: wrap;
+             margin: 0 auto;
+             width: 90%;
+         }
 
-    {{ form.contribution.errors }}
-    <div class="container">
-        {% for contribution in form.contribution %}
-        {{ contribution }}
-        {% endfor %}
-    </div>
-</form>
+         .contribution {
+             margin: 5px 20px;
+             //             border: 1px solid black;
+             //             box-shadow: 0px 0px 10px 0px black;
+         }
+
+         .contribution iframe {
+             box-shadow: 0 0 10px 0 black;
+         }
+
+         input[type="radio"] {
+             display: none;
+         }
+
+         .checkmark {
+             display: block;
+             height: 25px;
+             width: 25px;
+             background: white;
+             border: 1px solid black;
+             border-radius: 50%;
+             margin: 0 auto;
+             position: relative;
+         }
+
+         .contribution input:hover ~ .checkmark {
+             background: #DDD;
+         }
+
+         .contribution input:checked ~ .checkmark {
+             background: blue;
+         }
+
+         .contribution input ~ .checkmark:after {
+             content: "";
+             display: none;
+             position: absolute;
+             top: 9px;
+             left: 9px;
+             width: 7px;
+             height: 7px;
+             border-radius: 50%;
+             background: white;
+         }
+
+         .contribution input:checked ~ .checkmark:after {
+             display: block;
+         }
+        </style>
+    </head>
+    <body>
+        <h1>XYZ web</h1>
+        <hr />
+        <form method="post">{% csrf_token %}
+            {{ form.non_field_errors }}
+
+            {{ form.contribution.errors }}
+            <div class="container">
+                {% for contribution in form.contribution %}
+                <div class="contribution">
+                    {{ contribution }}
+                </div>
+                {% endfor %}
+            </div>
+
+            {{ form.username.errors }}
+            {{ form.username.label }}
+            {{ form.username }}
+            <input type="submit" value="Avgi stemme">
+        </form>
+    </body>
+</html>

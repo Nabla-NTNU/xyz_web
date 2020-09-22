@@ -48,7 +48,7 @@ class Contribution(models.Model):
 
 
 class Vote(models.Model):
-    username = models.CharField(max_length=20, unique=True)
+    username = models.CharField(max_length=20, unique=True, verbose_name="NTNU-brukernavn")
     contribution = models.ForeignKey(
         'Contribution',
         on_delete=models.CASCADE,
