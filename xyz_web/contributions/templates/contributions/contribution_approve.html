@@ -1,5 +1,11 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
 <h1>You are currently approving contributions as {{ request.user }}</h1>
 <form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update">
+    {% bootstrap_form form %}
+    {% bootstrap_button "Update" button_type="submit" button_class="btn-primary" value="Update"%}
+
+    <input type="submit" >
 </form>
+{% endblock content %}

@@ -1,6 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
 {% for contribution in contribution_list %}
     {{ contribution }}
-    {{ contribution.video_player|safe }}
+    {{ contribution.video_pladsaayer|safe }}
     {{ contribution.number_of_votes }}
     <br />
 {% endfor %}
+{% endblock content %}
+
