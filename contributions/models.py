@@ -47,7 +47,7 @@ class ConfirmationMixin(models.Model):
         # TODO: better solution here. Maybe use sites framework?
         # domain = self.request.META['HTTP_HOST']
         domain = "localhost:8000"
-        link = "https://" + domain + "/confirm/" + self.confirmation_token
+        link = "https://" + domain + "/confirm/" + self.__class__.__name__ + "/" + self.confirmation_token
 
         context = {"confirmation_link": link}
         msg = render_to_string(self.template_name, context)

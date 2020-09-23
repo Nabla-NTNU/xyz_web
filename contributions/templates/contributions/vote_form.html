@@ -61,10 +61,16 @@
          .name {
              text-align: center;
          }
+
+         .button {
+             background: #888888;
+             padding: 2px 5px;
+         }
         </style>
     </head>
     <body>
         <h1>XYZ web</h1>
+        <a href="{% url 'add' %}" class="button">Delta?</a>
         <hr />
         <form method="post">{% csrf_token %}
             {{ form.non_field_errors }}

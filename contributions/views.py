@@ -7,11 +7,13 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
+import sys
 
 
-def confirm(request, token):
+def confirm(request, class_name, token):
     # TODO: handle object not found
-    Vote.objects.get(confirmation_token=token).confirm()
+    the_class = getattr(sys.modules[__name__], class_name)
+    the_class.objects.get(confirmation_token=token).confirm()
     return redirect('vote')
 
 
@@ -59,7 +61,7 @@ class VoteView(CreateView):
 
 class ContributionApproveForm(Form):
     contributions = ContributionApproveField(
-        queryset=Contribution.objects.filter(approved=False))
+        queryset=Contribution.objects.filter(approved=False, confirmed=True))
 
 
 class ApproveContributionView(LoginRequiredMixin, FormView):
