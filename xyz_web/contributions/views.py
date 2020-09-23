@@ -45,6 +45,11 @@ class VoteForm(ModelForm):
         fields = ['username', 'contribution']
         field_classes = {'contribution': VoteChoiceField}
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Shuffle order of contributions
+        self.fields['contribution'].queryset = self.fields['contribution'].queryset.order_by('?')
+
 
 class VoteView(CreateView):
     form_class = VoteForm
