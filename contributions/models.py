@@ -77,6 +77,10 @@ class Contribution(ConfirmationMixin, models.Model):
     approved = models.BooleanField(default=False)
     history = HistoricalRecords()
 
+
+    class Meta:
+        verbose_name = "Bidrag"
+
     def __str__(self):
         return f"Contribution {self.name}"
 
@@ -106,6 +110,9 @@ class Vote(ConfirmationMixin, models.Model):
         on_delete=models.CASCADE,
     )
     history = HistoricalRecords()
+
+    class Meta:
+        verbose_name = "Stemme"
 
     def __str__(self):
         return f"Vote by {self.username} for {self.contribution.name}"

@@ -1,4 +1,5 @@
 from django.forms import ModelForm, ModelChoiceField, RadioSelect, CheckboxSelectMultiple, Form, ModelMultipleChoiceField
+from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, FormView
 from .models import Contribution, Vote
@@ -15,6 +16,24 @@ def confirm(request, class_name, token):
     the_class = getattr(sys.modules[__name__], class_name)
     the_class.objects.get(confirmation_token=token).confirm()
     return redirect('vote')
+
+
+class ConfirmView(TemplateView):
+    template_name = "contributions/confirm_confirmation.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        the_class = getattr(sys.modules[__name__], kwargs['class_name'])
+        the_object = the_class.objects.get(confirmation_token=kwargs['token'])
+        if not the_object.confirmed:
+            the_object.confirm()
+            context['action'] = "bekreftet."
+        else:
+            context['action'] = "allerede bekreftet fra før."
+
+        context['object_name'] = the_class._meta.verbose_name
+        return context
+
 
 
 class ContributionPlayerLabelMixin:
