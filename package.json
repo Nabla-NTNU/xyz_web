@@ -1,0 +1,28 @@
+{
+  "name": "xyz_web",
+  "version": "1.0.0",
+  "description": "Good package",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "popper.js": "^1.16.1",
+    "jquery": "^3.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nabla-NTNU/xyz_web.git"
+  },
+  "keywords": [
+    "nabalweb"
+  ],
+  "author": "Alex",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nabla-NTNU/xyz_web/issues"
+  },
+  "homepage": "https://github.com/Nabla-NTNU/xyz_web#readme"
+}
