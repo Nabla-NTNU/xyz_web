@@ -12,5 +12,5 @@ urlpatterns = [
         success_url='/'
     ), name='add'),
     path('approve/', ApproveContributionView.as_view()),
-    path('confirm/<token>/', confirm),
+    path('confirm/<class_name>/<token>/', confirm),
 ]
