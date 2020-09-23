@@ -11,6 +11,7 @@ django-simple-history = "*"
 black = ">=20"
 isort = "*"
 bootstrap4 = "*"
+django-bootstrap = "*"
 
 [requires]
 python_version = "3.8"
