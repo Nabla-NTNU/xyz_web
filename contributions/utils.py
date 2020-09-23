@@ -1,8 +1,8 @@
 """Utility functions. Mainly used by models.py."""
 
-from urllib.parse import urlparse
-import secrets
 import html
+import secrets
+from urllib.parse import urlparse
 
 
 def get_random_token(token_length):
@@ -19,6 +19,7 @@ def get_random_token(token_length):
 # The parsers have names on the form `get_video_id_<service_name>` and
 # players have names `<service_name>Player`.
 
+
 def get_video_id_youtube(video_url):
     parsed = urlparse(video_url)
     queries = parsed.query.split("&")
@@ -31,7 +32,7 @@ def get_video_id_youtube(video_url):
 
 def get_video_id_vimeo(video_url):
     parsed = urlparse(video_url)
-    id = parsed.path.strip('/')
+    id = parsed.path.strip("/")
     return id
 
 
@@ -48,7 +49,9 @@ def player(url_parser, specific_player):
         video_id = url_parser(video_url)
         video_id = html.escape(video_id)
         return specific_player(video_id)
+
     return video_player
+
 
 parsers = {
     "youtube": get_video_id_youtube,

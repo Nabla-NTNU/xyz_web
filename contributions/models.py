@@ -4,25 +4,27 @@ from urllib.parse import urlparse
 from django.core.mail import send_mail
 from django.db import models
 from django.forms import ModelForm
+from django.template.loader import render_to_string
 from simple_history.models import HistoricalRecords
 
 from .utils import get_random_token, parsers, players
-from django.template.loader import render_to_string
-
 
 TOKEN_LENGTH = 10  # NB, bytes not chars.
 
 
 class ConfirmationMixin(models.Model):
     """An object requiring confirmation upon save by mail."""
+
     template_name = "mail/confirm_challenge.html"
 
-    username = models.CharField(max_length=20, unique=True, verbose_name="NTNU-brukernavn")
+    username = models.CharField(
+        max_length=20, unique=True, verbose_name="NTNU-brukernavn"
+    )
     confirmed = models.BooleanField(default=False)
     confirmation_token = models.CharField(
-        max_length=2*TOKEN_LENGTH,
+        max_length=2 * TOKEN_LENGTH,
         default=partial(get_random_token, TOKEN_LENGTH),
-        unique=True
+        unique=True,
     )
 
     class Meta:
@@ -47,22 +49,28 @@ class ConfirmationMixin(models.Model):
         # TODO: better solution here. Maybe use sites framework?
         # domain = self.request.META['HTTP_HOST']
         domain = "localhost:8000"
-        link = "https://" + domain + "/confirm/" + self.__class__.__name__ + "/" + self.confirmation_token
+        link = (
+            "https://"
+            + domain
+            + "/confirm/"
+            + self.__class__.__name__
+            + "/"
+            + self.confirmation_token
+        )
 
         context = {"confirmation_link": link}
         msg = render_to_string(self.template_name, context)
 
         send_mail(
-            'Bekreft XYZ stemme',
+            "Bekreft XYZ stemme",
             msg,
-            'webkom@nabla.ntnu.no',
+            "webkom@nabla.ntnu.no",
             [self.username + "@stud.ntnu.no"],
             fail_silently=False,
         )
 
     def send_confirmed_mail(self):
         """Sends a mail to the user confirming their vote."""
-
 
 
 class Contribution(ConfirmationMixin, models.Model):
@@ -76,7 +84,6 @@ class Contribution(ConfirmationMixin, models.Model):
     description = models.TextField()
     approved = models.BooleanField(default=False)
     history = HistoricalRecords()
-
 
     class Meta:
         verbose_name = "Bidrag"
@@ -106,7 +113,7 @@ class Contribution(ConfirmationMixin, models.Model):
 
 class Vote(ConfirmationMixin, models.Model):
     contribution = models.ForeignKey(
-        'Contribution',
+        "Contribution",
         on_delete=models.CASCADE,
     )
     history = HistoricalRecords()
