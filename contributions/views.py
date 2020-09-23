@@ -35,7 +35,6 @@ class ConfirmView(TemplateView):
         return context
 
 
-
 class ContributionPlayerLabelMixin:
     def label_from_instance(self, obj):
         return mark_safe(obj.video_player())
