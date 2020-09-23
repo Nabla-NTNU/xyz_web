@@ -15,10 +15,6 @@ def confirm(request, token):
     return redirect('vote')
 
 
-class MainView(ListView):
-    model = Contribution
-
-
 class ContributionPlayerLabelMixin:
     def label_from_instance(self, obj):
         return mark_safe(obj.video_player())
