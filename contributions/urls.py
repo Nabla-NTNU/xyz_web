@@ -8,7 +8,7 @@ urlpatterns = [
     path('', VoteView.as_view(), name='vote'),
     path('add/', CreateView.as_view(
         model=Contribution,
-        fields=['name', 'contact_email', 'video_link', 'description'],
+        fields=['name', 'username', 'video_link', 'description'],
         success_url='/'
     ), name='add'),
     path('approve/', ApproveContributionView.as_view()),
