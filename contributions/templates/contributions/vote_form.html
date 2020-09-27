@@ -1,16 +1,58 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <style>
+         .title {
+             font-family: sans-serif;
+             text-align: center;
+             margin: 0;
+             font-size: 40px;
+         }
+
+         footer {
+             background: #222;
+             width: 100%;
+             height: 100px;
+             margin: 0;
+             display: flex;
+             flex-wrap: wrap;
+             justify-content: center;
+             padding: 30px 0;
+         }
+
+         .footnote {
+             color: #999;
+             text-decoration: none;
+             font-family: sans-serif;
+             font-size: small;
+             padding: 0 20px;
+         }
+
+         .header-logo {
+         }
+         body {
+             margin: 0;
+             line-height: 1.6;
+             font-size: 18px;
+             color: #444;
+         }
+
+         #wrapper {
+             margin: 40px auto;
+             max-width: 1400px;
+         }
+
          .container {
              display: flex;
              flex-wrap: wrap;
              margin: 0 auto;
-             width: 90%;
+             justify-content: space-between;
          }
 
          .contribution {
              margin: 5px 20px;
+             margin-bottom: 20px;
              //             border: 1px solid black;
              //             box-shadow: 0px 0px 10px 0px black;
          }
@@ -69,25 +111,34 @@
         </style>
     </head>
     <body>
-        <h1>XYZ web</h1>
-        <a href="{% url 'add' %}" class="button">Delta?</a>
-        <hr />
-        <form method="post">{% csrf_token %}
-            {{ form.non_field_errors }}
+        <div id="wrapper" >
+            <header>
+                <h1 class="title">XYZ web</h1>
+            </header>
+            <hr />
+            <form method="post">{% csrf_token %}
+                {{ form.non_field_errors }}
 
-            {{ form.contribution.errors }}
-            <div class="container">
-                {% for contribution in form.contribution %}
-                <div class="contribution">
-                    {{ contribution }}
+                {{ form.contribution.errors }}
+                <div class="container">
+                    {% for contribution in form.contribution %}
+                    <div class="contribution">
+                        {{ contribution }}
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
 
-            {{ form.username.errors }}
-            {{ form.username.label }}
-            {{ form.username }}
-            <input type="submit" value="Avgi stemme">
-        </form>
+                {{ form.username.errors }}
+                {{ form.username.label }}
+                {{ form.username }}
+                <input type="submit" value="Avgi stemme">
+            </form>
+            <a href="{% url 'add' %}" class="button">Delta?</a>
+        </div> <!-- #wrapper -->
+        <footer>
+            <a href="" class="footnote">Trykk her for <informasj></informasj>on hva vi lagrer av persondata.</a>
+            <a href="{% url 'approve' %}" class="footnote">Moderator?</a>
+            <span class="footnote">Laget av WebKom Nabla</span>
+        </footer>
     </body>
 </html>

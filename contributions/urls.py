@@ -23,6 +23,6 @@ urlpatterns = [
         ),
         name="thanks",
     ),
-    path("approve/", ApproveContributionView.as_view()),
+    path("approve/", ApproveContributionView.as_view(), name='approve'),
     path("confirm/<class_name>/<token>/", ConfirmView.as_view()),
 ]
