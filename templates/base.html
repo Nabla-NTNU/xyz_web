@@ -10,6 +10,11 @@
              font-size: 40px;
          }
 
+         .title a {
+             text-decoration: none;
+             color: inherit;
+         }
+
          footer {
              background: #222;
              width: 100%;
@@ -100,7 +105,8 @@
              display: block;
          }
 
-         .name {
+         .contribution--name {
+             display: block;
              text-align: center;
          }
 
@@ -113,14 +119,14 @@
     <body>
         <div id="wrapper" >
             <header>
-                <h1 class="title">XYZ web</h1>
+                <h1 class="title"><a href="{% url 'vote' %}">XYZ web</a></h1>
             </header>
             <hr />
             {% block content %}
             {% endblock content %}
         </div> <!-- #wrapper -->
         <footer>
-            <a href="" class="footnote">Trykk her for <informasj></informasj>on hva vi lagrer av persondata.</a>
+            <a href="{% url 'personal-information' %}" class="footnote">Trykk her for informasjon om hva vi lagrer av persondata.</a>
             <a href="{% url 'approve' %}" class="footnote">Moderator?</a>
             <span class="footnote">Laget av WebKom Nabla</span>
         </footer>

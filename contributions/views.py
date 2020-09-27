@@ -6,7 +6,7 @@ from django.forms import (CheckboxSelectMultiple, Form, ModelChoiceField,
                           ModelForm, ModelMultipleChoiceField, RadioSelect)
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.utils.html import mark_safe
+from django.utils.html import mark_safe, format_html
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, FormView
 from django.views.generic.list import ListView
@@ -33,7 +33,10 @@ class ConfirmView(TemplateView):
 
 class ContributionPlayerLabelMixin:
     def label_from_instance(self, obj):
-        return mark_safe(obj.video_player())
+        return format_html("<span class='contribution--name'>{}</span>{}",
+                           obj.name,
+                           mark_safe(obj.video_player())
+                           )  # TODO: Think really hard about this mark_safe
 
 
 class RadioSelectCustomOption(RadioSelect):
