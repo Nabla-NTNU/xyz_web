@@ -124,7 +124,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "node_modules"),)
+STATICFILES_DIRS = [
+    BASE_DIR / "node_modules",  # TODO: Is this secure?
+]
 
 
 # TODO: Remvoe in production
