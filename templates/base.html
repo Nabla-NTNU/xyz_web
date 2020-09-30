@@ -25,6 +25,8 @@
              flex-wrap: wrap;
              justify-content: center;
              padding: 30px 0;
+             position: absolute;
+             bottom: 0;
          }
 
          .footnote {
@@ -47,8 +49,15 @@
          }
 
          #wrapper {
-             margin: 40px auto;
+             padding: 40px 0;
+             margin: 0 auto;
              max-width: 1400px;
+         }
+
+         #footer-fixer {
+             position: relative;
+             min-height: 100vh;
+             padding-bottom: 100px;  /* Footer height */
          }
 
          .container {
@@ -132,23 +141,25 @@
         </style>
     </head>
     <body>
-        <div id="wrapper" >
-            <header>
-                {% block header %}
-                <h1 class="title"><a href="{% url 'vote' %}">XYZ web</a></h1>
-                {% block header-info %}
+        <div id="footer-fixer"> <!-- Makes the f%&king footer stay at the bottom -->
+            <div id="wrapper" >
+                <header>
+                    {% block header %}
+                    <h1 class="title"><a href="{% url 'vote' %}">XYZ web</a></h1>
+                    {% block header-info %}
 
-                {% endblock header-info %}
-                {% endblock header %}
-            </header>
-            <hr />
-            {% block content %}
-            {% endblock content %}
-        </div> <!-- #wrapper -->
-        <footer>
-            <a href="{% url 'personal-information' %}" class="footnote">Trykk her for informasjon om hva vi lagrer av persondata.</a>
-            <a href="{% url 'approve' %}" class="footnote">Moderator?</a>
-            <span class="footnote">Laget av WebKom Nabla</span>
-        </footer>
+                    {% endblock header-info %}
+                    {% endblock header %}
+                </header>
+                <hr />
+                {% block content %}
+                {% endblock content %}
+            </div> <!-- #wrapper -->
+            <footer>
+                <a href="{% url 'personal-information' %}" class="footnote">Trykk her for informasjon om hva vi lagrer av persondata.</a>
+                <a href="{% url 'approve' %}" class="footnote">Moderator?</a>
+                <span class="footnote">Laget av WebKom Nabla</span>
+            </footer>
+        </div>
     </body>
 </html>
