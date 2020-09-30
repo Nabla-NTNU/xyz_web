@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% load bootstrap4 %}
 
 {% block content %}
+<a href="{% url 'add' %}" class="button">Delta?</a>
 <form method="post">{% csrf_token %}
     {{ form.non_field_errors }}
 
@@ -13,10 +15,10 @@
         {% endfor %}
     </div>
 
-    {{ form.username.errors }}
-    {{ form.username.label }}
-    {{ form.username }}
-    <input type="submit" value="Avgi stemme">
+    <center>
+        {{ form.username.errors }}
+        {% bootstrap_field form.username show_label=False%}
+        {% bootstrap_button "Avgi stemme" button_type="submit" button_class="btn-primary" value="Save"%}
+    </center>
 </form>
-<a href="{% url 'add' %}" class="button">Delta?</a>
 {% endblock content %}

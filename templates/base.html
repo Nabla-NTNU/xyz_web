@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="{% static "bootstrap/dist/css/bootstrap.min.css" %}">
         <style>
          .title {
              font-family: sans-serif;
@@ -36,6 +37,8 @@
 
          .header-logo {
          }
+
+
          body {
              margin: 0;
              line-height: 1.6;
@@ -53,13 +56,12 @@
              flex-wrap: wrap;
              margin: 0 auto;
              justify-content: space-between;
+             max-width: none;  /* Overwrite Bootstrap */
          }
 
          .contribution {
              margin: 5px 20px;
              margin-bottom: 20px;
-             //             border: 1px solid black;
-             //             box-shadow: 0px 0px 10px 0px black;
          }
 
          .contribution iframe {
@@ -111,15 +113,33 @@
          }
 
          .button {
-             background: #888888;
-             padding: 2px 5px;
+	           padding: 2px 5px;
+	           margin: 0 auto;
+	           display: block;
+	           width: 228px;
+	           text-align: center;
+	           text-decoration: none;
+	           text-transform: uppercase;
+	           border: 1px solid gray;
+	           box-shadow: 0px 2px 5px -2px gray;
+	           font-family: sans-serif;
+             color: inherit;
+         }
+
+         .button:hover {
+	           box-shadow: 0px 2px 5px -2px black;
          }
         </style>
     </head>
     <body>
         <div id="wrapper" >
             <header>
+                {% block header %}
                 <h1 class="title"><a href="{% url 'vote' %}">XYZ web</a></h1>
+                {% block header-info %}
+
+                {% endblock header-info %}
+                {% endblock header %}
             </header>
             <hr />
             {% block content %}
