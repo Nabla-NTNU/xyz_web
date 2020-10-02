@@ -10,10 +10,7 @@ Requires the following environment variables to be set:
 """
 
 from os import environ
-import pymysql
 from .base import *  # noqa: F401, F403
-
-pymysql.install_as_MySQLdb()
 
 get_env = environ.get  # Just alias with shorter name.
 
@@ -23,7 +20,7 @@ SECRET_KEY = get_env("SECRET_KEY")
 ALLOWED_HOSTS = ['xyz.nabla.no']
 
 VARIABLE_ROOT = get_env("VARIABLE_ROOT")
-STATIC_ROOT = VARIABLE_ROOT / 'static_collected'
+STATIC_ROOT = os.path.join(VARIABLE_ROOT, 'static_collected')
 
 DATABASES = {
     "default": {
