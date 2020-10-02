@@ -2,6 +2,7 @@
 @file Production settings
 
 Requires the following environment variables to be set:
+- VARIABLE_ROOT
 - SECRET_KEY
 - MYSQL_DATABASE
 - MYSQL_USER
