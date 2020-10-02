@@ -21,6 +21,9 @@ SECRET_KEY = get_env("SECRET_KEY")
 
 ALLOWED_HOSTS = ['xyz.nabla.no']
 
+VARIABLE_ROOT = get_env("VARIABLE_ROOT")
+STATIC_ROOT = VARIABLE_ROOT / 'static_collected'
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
@@ -46,3 +49,4 @@ LOGGING = {
     },
     "loggers": {"django": {"handlers": ["file"], "level": "ERROR", "propagate": True}},
 }
+
