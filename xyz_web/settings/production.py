@@ -40,7 +40,7 @@ LOGGING = {
             "level": "ERROR",
             "class": "logging.FileHandler",
             "filename": get_env(
-                "DJANGO_LOG_PATH", "/var/log/django/nablaweb/error.log"
+                "DJANGO_LOG_PATH", "/var/log/django/xyz/error.log"
             ),
             "formatter": "timestamp",
         },
