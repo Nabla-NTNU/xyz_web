@@ -5,7 +5,7 @@ from django.core.mail import send_mail
 from django.db import models
 from django.forms import ModelForm
 from django.template.loader import render_to_string
-from simple_history.models import HistoricalRecords
+#from simple_history.models import HistoricalRecords
 
 from .utils import get_random_token, parsers, players
 
@@ -83,7 +83,7 @@ class Contribution(ConfirmationMixin, models.Model):
     video_link = models.URLField(help_text="Lenke til Vimeo eller YouTube video.")
     description = models.TextField()
     approved = models.BooleanField(default=False)
-    history = HistoricalRecords()
+#    history = HistoricalRecords()
 
     class Meta:
         verbose_name = "Bidrag"
@@ -116,7 +116,7 @@ class Vote(ConfirmationMixin, models.Model):
         "Contribution",
         on_delete=models.CASCADE,
     )
-    history = HistoricalRecords()
+#    history = HistoricalRecords()
 
     class Meta:
         verbose_name = "Stemme"
