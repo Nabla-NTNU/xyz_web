@@ -103,6 +103,8 @@ class Contribution(ConfirmationMixin, models.Model):
             return "youtube"
         elif "vimeo" in netloc.lower():
             return "vimeo"
+        elif "youtu.be" in netloc.lower():
+            return "youtube_short"
 
     def video_id(self):
         return parsers[self.get_video_service()](self.video_link)

@@ -30,6 +30,13 @@ def get_video_id_youtube(video_url):
     return None
 
 
+def get_video_id_youtube_short(video_url):
+    parsed = urlparse(video_url)
+    # Format is https://youtu.be/-0-HIFxmnC0
+    id = parsed.path.strip("/")
+    return id
+
+
 def get_video_id_vimeo(video_url):
     parsed = urlparse(video_url)
     id = parsed.path.strip("/")
@@ -54,12 +61,14 @@ def player(url_parser, specific_player):
 
 
 parsers = {
+    "youtube_short": get_video_id_youtube_short,  # Support YouTube's short URL
     "youtube": get_video_id_youtube,
     "vimeo": get_video_id_vimeo,
 }
 
 
 players = {
+    "youtube_short": player(get_video_id_youtube_short, youtubePlayer),
     "youtube": player(get_video_id_youtube, youtubePlayer),
     "vimeo": player(get_video_id_vimeo, vimeoPlayer),
 }
