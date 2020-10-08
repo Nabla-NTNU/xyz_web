@@ -17,7 +17,7 @@
 
     <center>
         {{ form.username.errors }}
-        {% bootstrap_field form.username show_label=False%}
+        {% bootstrap_field form.username show_label=False field_class='col-md-3' %}
         {% bootstrap_button "Avgi stemme" button_type="submit" button_class="btn-primary" value="Save"%}
     </center>
 </form>
