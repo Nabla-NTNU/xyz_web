@@ -13,13 +13,13 @@
             {{ contribution }}
         </div>
 	{% empty %}
-	{# comment #}
+	{% comment %}
 	OK, this is not pretty. It would not be hard to improve this by
 	writing some Python code. But time was of the essence, and I'm lazy.
 	Basically, it displays a dummy-frame where the video should be, if there are 
 	none or only one video.
 	Thus, there are always at least two "frames".
-	{# endcomment #}
+	{% endcomment %}
         <div class="contribution">
 	    <span class="contribution--name">Ditt bidrag her</span>
 	    <div class="dummy_video"> 
