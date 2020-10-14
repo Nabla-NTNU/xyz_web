@@ -81,7 +81,6 @@ class Contribution(ConfirmationMixin, models.Model):
 
     name = models.CharField("Innslagets navn", max_length=50)
     video_link = models.URLField(help_text="Lenke til Vimeo eller YouTube video.")
-    description = models.TextField()
     approved = models.BooleanField(default=False)
     history = HistoricalRecords()
 

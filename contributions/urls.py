@@ -11,7 +11,7 @@ urlpatterns = [
         "add/",
         CreateView.as_view(
             model=Contribution,
-            fields=["name", "username", "video_link", "description"],
+            fields=["name", "username", "video_link"],
             success_url=reverse_lazy("thanks"),
         ),
         name="add",
