@@ -111,8 +111,10 @@ class Contribution(ConfirmationMixin, models.Model):
     def video_player(self):
         try:
             return players[self.get_video_service()](self.video_link)
-        except KeyError:  # There's something wrong with the URL, probably
-            return "<h2>There was an error displaying this video."
+        except (ValueError, KeyError):
+            # There's something wrong with the URL, probably
+            # return "<h2>There was an error displaying this video."
+            return '<div class="dummy_video"><h2>There was an error displaying this video. Make sure the URL is correct.</h2></div>'
 
 
 class Vote(ConfirmationMixin, models.Model):
