@@ -2,8 +2,10 @@
 {% load bootstrap4 %}
 {% block content %}
 <form method="post">{% csrf_token %}
-    {% bootstrap_form form %}
-    {% bootstrap_button "Submit" button_type="submit" button_class="btn-primary" value="Save"%}
+    <div class="narrow">
+        {% bootstrap_form form %}
+        {% bootstrap_button "Submit" button_type="submit" button_class="btn-primary" value="Save"%}
+    </div>
 </form>
 {% endblock content %}
 
