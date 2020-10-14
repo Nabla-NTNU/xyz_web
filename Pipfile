@@ -12,6 +12,7 @@ black = ">=20"
 isort = "*"
 django-bootstrap4 = "*"
 mysqlclient = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"
