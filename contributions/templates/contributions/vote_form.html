@@ -2,45 +2,38 @@
 {% load bootstrap4 %}
 
 {% block content %}
-<a href="{% url 'add' %}" class="button">Delta?</a>
-<form method="post">{% csrf_token %}
-    {{ form.non_field_errors }}
+    <a href="{% url 'add' %}" class="button">Delta?</a>
+    <form method="post">{% csrf_token %}
+        {{ form.non_field_errors }}
 
-    {{ form.contribution.errors }}
-    <div class="container">
-        {% for contribution in form.contribution %}
-        <div class="contribution">
-            {{ contribution }}
+        {{ form.contribution.errors }}
+        <div class="container">
+            {% for contribution in form.contribution %}
+                <div class="contribution">
+                    {{ contribution }}
+                </div>
+	          {% empty %}
+                <div class="contribution">
+	                  <span class="contribution--name">Ditt bidrag her</span>
+	                  <div class="dummy_video"> 
+	                      <h2>Ditt bidrag her</h2>
+	                  </div>
+                </div>
+            {% endfor %}
+            <div class="contribution">
+	              <span class="contribution--name">Ditt bidrag her</span>
+                <a href="{% url 'add' %}">
+	                  <div class="dummy_video"> 
+	                      <h2>Ditt bidrag her</h2>
+	                  </div>
+                </a>
+            </div>
         </div>
-	{% empty %}
-	{% comment %}
-	OK, this is not pretty. It would not be hard to improve this by
-	writing some Python code. But time was of the essence, and I'm lazy.
-	Basically, it displays a dummy-frame where the video should be, if there are 
-	none or only one video.
-	Thus, there are always at least two "frames".
-	{% endcomment %}
-        <div class="contribution">
-	    <span class="contribution--name">Ditt bidrag her</span>
-	    <div class="dummy_video"> 
-	        <h2>Ditt bidrag her</h2>
-	    </div>
-        </div>
-        {% endfor %}
-	{% if form.contribution|length < 2 %}
-        <div class="contribution">
-	    <span class="contribution--name">Ditt bidrag her</span>
-	    <div class="dummy_video"> 
-	        <h2>Ditt bidrag her</h2>
-	    </div>
-        </div>
-	{% endif %}
-    </div>
 
-    <center>
-        {{ form.username.errors }}
-        {% bootstrap_field form.username show_label=False field_class='col-md-3' %}
-        {% bootstrap_button "Avgi stemme" button_type="submit" button_class="btn-primary" value="Save"%}
-    </center>
-</form>
+        <center>
+            {{ form.username.errors }}
+            {% bootstrap_field form.username show_label=False field_class='col-md-3' %}
+            {% bootstrap_button "Avgi stemme" button_type="submit" button_class="btn-primary" value="Save"%}
+        </center>
+    </form>
 {% endblock content %}
