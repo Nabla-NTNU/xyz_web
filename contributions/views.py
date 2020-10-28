@@ -13,6 +13,8 @@ from django.views.generic.list import ListView
 
 from .models import Contribution, Vote
 
+from datetime import datetime
+
 
 class ConfirmView(TemplateView):
     template_name = "contributions/confirm_confirmation.html"
@@ -77,6 +79,12 @@ class VoteView(CreateView):
     form_class = VoteForm
     success_url = reverse_lazy("vote")
     model = Vote
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        deadline = datetime(2020, 10, 31, hour=23, minute=59, second=59)
+        context["voting_inactive"] = datetime.now() > deadline
+        return context
 
 
 class ContributionApproveForm(Form):
