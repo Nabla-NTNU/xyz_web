@@ -82,8 +82,10 @@ class VoteView(CreateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        deadline = datetime(2020, 10, 31, hour=23, minute=59, second=59)
-        context["voting_inactive"] = datetime.now() > deadline
+        deadline_contribution = datetime(2020, 10, 31, hour=23, minute=59, second=59)
+        deadline_vote = datetime(2020, 11, 9, hour=23, minute=59, second=59)
+        context["voting_active"] = datetime.now() < deadline_vote
+        context["contributing_active"] = datetime.now() < deadline_contribution
         return context
 
 

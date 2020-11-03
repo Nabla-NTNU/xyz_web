@@ -2,7 +2,11 @@
 {% load bootstrap4 %}
 
 {% block content %}
+    {% if contributing_active %}
     <a href="{% url 'add' %}" class="button">Delta?</a>
+    {% else %}
+    <h4 class="text-center">Frist for å sende inn bidrag har gått ut</h4>
+    {% endif %}
     <form method="post">{% csrf_token %}
         {{ form.non_field_errors }}
 
@@ -20,6 +24,7 @@
 	                  </div>
                 </div>
             {% endfor %}
+	    {% if contributing_active %}
             <div class="contribution">
 	              <span class="contribution--name">Ditt bidrag her</span>
                 <a href="{% url 'add' %}">
@@ -28,15 +33,16 @@
 	                  </div>
                 </a>
             </div>
+	    {% endif %}
         </div>
 
         <center>
-            {% if voting_inactive %}
-            Avstemningen er ikke åpen
-            {% else %}
+            {% if voting_active %}
             {{ form.username.errors }}
             {% bootstrap_field form.username show_label=False field_class='col-md-3' %}
             <input type="submit" class="btn btn-primary" value="Avgi stemme">
+            {% else %}
+            Avstemningen er ikke åpen
             {% endif %}
         </center>
     </form>
