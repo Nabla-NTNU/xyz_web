@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 
 from .models import Contribution, Vote
-from .views import ApproveContributionView, ConfirmView, VoteView
+from .views import ApproveContributionView, ConfirmView, VoteView, VoteCountView
 
 urlpatterns = [
     path("", VoteView.as_view(), name="vote"),
@@ -25,4 +25,5 @@ urlpatterns = [
     ),
     path("approve/", ApproveContributionView.as_view(), name='approve'),
     path("confirm/<class_name>/<token>/", ConfirmView.as_view()),
+    path("vote-count", VoteCountView.as_view()),
 ]

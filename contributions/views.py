@@ -10,6 +10,7 @@ from django.utils.html import mark_safe, format_html
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, FormView
 from django.views.generic.list import ListView
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 from .models import Contribution, Vote
 
@@ -108,3 +109,11 @@ class ApproveContributionView(LoginRequiredMixin, FormView):
         # Log out user
         logout(self.request)
         return super().form_valid(form)
+
+
+class VoteCountView(UserPassesTestMixin, ListView):
+    model = Contribution
+    template_name="contributions/vote_count.htm"
+
+    def test_func(self):
+        return self.request.user.is_staff

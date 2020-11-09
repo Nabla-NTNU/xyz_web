@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-center">Oversikt antall stemmer</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Navn</th>
+            <th>Bidragsyter</th>
+            <th>Antall stemmer</th>
+            <th>Lenke til bidrag</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contribution in object_list %}
+        <tr>
+            <td>{{ contribution.name }}</td>
+            <td>{{ contribution.username }}@stud.ntnu.no</td>
+            <td>{{ contribution.number_of_votes }}</td>
+            <td><a href="{{ contribution.video_link }}">{{ contribution.video_link|truncatechars:27 }}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}
