@@ -113,7 +113,7 @@ class ApproveContributionView(LoginRequiredMixin, FormView):
 
 class VoteCountView(UserPassesTestMixin, ListView):
     model = Contribution
-    template_name="contributions/vote_count.htm"
+    template_name="contributions/vote_count.html"
 
     def test_func(self):
         return self.request.user.is_staff
